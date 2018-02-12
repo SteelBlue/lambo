@@ -37,6 +37,7 @@ showhelp()
     echo "${green}  -n, --node${reset}                    Runs '${green}yarn${reset}' if installed, otherwise runs '${green}npm install${reset}' after creating the project"
     echo "${green}  -b, --browser \"browser path\"${reset}  Opens site in specified browser"
     echo "${green}  -l, --link${reset}                    Creates a Valet link to the project directory"
+    echo "${green}  -s, --secure${reset}                    Secure the project with a trusted TLS certificate"
     quit
 }
 
@@ -77,7 +78,8 @@ AUTH=false
 NODE=false
 CODEEDITOR=""
 BROWSER=""
-LINK=false' > ~/.lambo/config
+LINK=false
+SECURE=false' > ~/.lambo/config
 
     edit ~/.lambo/config
 }
@@ -170,6 +172,7 @@ CODEEDITOR=""
 BROWSER=""
 TLD=$(php -r "echo json_decode(file_get_contents('$HOME/.valet/config.json'))->domain;")
 LINK=false
+SECURE=false
 
 ### Load config if it exists
 if [[ -f ~/.lambo/config ]]; then
@@ -238,6 +241,9 @@ while [[ $# -gt 0 ]]; do
             ;;
         -l|--link)
             LINK=true
+            ;;
+        -s|--secure)
+            SECURE=true
             ;;
         *)
             ;;
@@ -319,9 +325,12 @@ perlCommands=(
     "s/(APP_URL=)(.*)/\1http:\/\/$PROJECTNAME.$TLD/g"
 )
 
+if [[ "$SECURE" = true ]]; then
+    valet secure "$PROJECTNAME"
+fi
+
 if [[ "$LINK" = true ]]; then
     valet link "$PROJECTNAME"
-    valet secure "$PROJECTNAME"
 fi
 
 for perlCommand in "${perlCommands[@]}"; do
