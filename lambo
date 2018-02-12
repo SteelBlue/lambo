@@ -36,8 +36,8 @@ showhelp()
     echo "${green}  -a, --auth${reset}                    Use Artisan to scaffold all of the routes and views you need for authentication"
     echo "${green}  -n, --node${reset}                    Runs '${green}yarn${reset}' if installed, otherwise runs '${green}npm install${reset}' after creating the project"
     echo "${green}  -b, --browser \"browser path\"${reset}  Opens site in specified browser"
-    echo "${green}  -l, --link${reset}                    Creates a Valet link to the project directory"
     echo "${green}  -s, --secure${reset}                    Secure the project with a trusted TLS certificate"
+    echo "${green}  -l, --link${reset}                    Creates a Valet link to the project directory"
     quit
 }
 
@@ -239,11 +239,11 @@ while [[ $# -gt 0 ]]; do
         -n|--node)
             NODE=true
             ;;
-        -l|--link)
-            LINK=true
-            ;;
         -s|--secure)
             SECURE=true
+            ;;
+        -l|--link)
+            LINK=true
             ;;
         *)
             ;;
