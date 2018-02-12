@@ -321,6 +321,7 @@ perlCommands=(
 
 if [[ "$LINK" = true ]]; then
     valet link "$PROJECTNAME"
+    valet secure "$PROJECTNAME"
 fi
 
 for perlCommand in "${perlCommands[@]}"; do
