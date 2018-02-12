@@ -78,8 +78,8 @@ AUTH=false
 NODE=false
 CODEEDITOR=""
 BROWSER=""
-LINK=false
-SECURE=false' > ~/.lambo/config
+SECURE=false
+LINK=false' > ~/.lambo/config
 
     edit ~/.lambo/config
 }
@@ -171,8 +171,8 @@ NODE=false
 CODEEDITOR=""
 BROWSER=""
 TLD=$(php -r "echo json_decode(file_get_contents('$HOME/.valet/config.json'))->domain;")
-LINK=false
 SECURE=false
+LINK=false
 
 ### Load config if it exists
 if [[ -f ~/.lambo/config ]]; then
